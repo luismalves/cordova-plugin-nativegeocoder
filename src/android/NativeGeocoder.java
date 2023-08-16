@@ -110,8 +110,7 @@ public class NativeGeocoder extends CordovaPlugin {
                     placemark.put("thoroughfare", address.getThoroughfare() != null ? address.getThoroughfare() : "");
                     placemark.put("subThoroughfare", address.getSubThoroughfare() != null ? address.getSubThoroughfare() : "");
                     placemark.put("areasOfInterest", address.getFeatureName() != null ? new JSONArray(new String[]{ address.getFeatureName()} ) : new JSONArray());
-                    placemark.put("addressLines", this.getAddressLines(address));
-                    
+
                     resultObj.put(placemark);
                 }
 
@@ -183,7 +182,6 @@ public class NativeGeocoder extends CordovaPlugin {
                             placemark.put("thoroughfare", address.getThoroughfare() != null ? address.getThoroughfare() : "");
                             placemark.put("subThoroughfare", address.getSubThoroughfare() != null ? address.getSubThoroughfare() : "");
                             placemark.put("areasOfInterest", address.getFeatureName() != null ? new JSONArray(new String[]{ address.getFeatureName() }) : new JSONArray());
-                            placemark.put("addressLines", this.getAddressLines(address));
 
                             resultObj.put(placemark);
                         }
@@ -213,18 +211,6 @@ public class NativeGeocoder extends CordovaPlugin {
             PluginResult r = new PluginResult(PluginResult.Status.ERROR, "Geocoder:getFromLocationName Error: " + errorMsg);
             callbackContext.sendPluginResult(r);
         }
-    }
-
-    /**
-     * Get address lines array
-     * @return boolean
-     */
-    private JSONArray getAddressLines(Address address) {
-        JSONArray jsonArray = new JSONArray();
-        for (int n = 0; n <= address.getMaxAddressLineIndex(); n++) {
-            jsonArray.put(address.getAddressLine(n));
-        }
-        return jsonArray;
     }
 
     /**
